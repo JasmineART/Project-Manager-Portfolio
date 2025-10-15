@@ -894,25 +894,6 @@
                         </div>
                     </div>
                 </div>
-
-        // Toggle documentation accordion
-        function toggleDoc(header) {
-            const item = header.parentElement;
-            const content = item.querySelector('.doc-content');
-            const chevron = header.querySelector('.fa-chevron-down');
-            const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
-            
-            if (isOpen) {
-                content.style.maxHeight = '0';
-                chevron.style.transform = 'rotate(0deg)';
-            } else {
-                content.style.maxHeight = content.scrollHeight + 'px';
-                chevron.style.transform = 'rotate(180deg)';
-            }
-        }
-
-        // Hamburger menu toggle function
-                </div>
             </div>
         </div>
     </section>
@@ -958,6 +939,22 @@
                 });
             });
         });
+
+        // Toggle documentation accordion
+        function toggleDoc(header) {
+            const item = header.parentElement;
+            const content = item.querySelector('.doc-content');
+            const chevron = header.querySelector('.fa-chevron-down');
+            const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+            
+            if (isOpen) {
+                content.style.maxHeight = '0';
+                chevron.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                chevron.style.transform = 'rotate(180deg)';
+            }
+        }
 
         // Hamburger menu toggle function
         function toggleMenu() {
