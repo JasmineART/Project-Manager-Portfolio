@@ -3,81 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Tracking App Case Study | Jasmine A.R.T., PMP</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Inventory Tracking App | Jasmine A.R.T., PMP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
-        /* --- Professional Monochrome + Blue Palette --- */
         :root {
-            --primary-text: #1a1a1a;
-            --secondary-text: #4a5568;
-            --background-light: #f7f7f7;
-            --accent-color: #2b6cb0;
-            --accent-hover: #1e4d7a;
-            --success-color: #2b6cb0;
-            --gold-accent: #666666;
-            --border-color: #e0e0e0;
+            --primary-text: #2d3748;
+            --secondary-text: #718096;
+            --background-light: #f9fafb;
+            --accent-color: #7c9cbf;
+            --accent-hover: #5a7fa3;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             color: var(--primary-text);
-            line-height: 1.6;
-            background-color: #fff;
-            scroll-behavior: smooth;
-            padding-top: 40px;
-            overflow-x: hidden;
-            word-wrap: break-word;
+            line-height: 1.65;
+            background-color: #ffffff;
+            font-size: 16px;
         }
 
         h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            margin-bottom: 0.5em;
-            word-wrap: break-word;
+            font-weight: 600;
+            margin-bottom: 0.75em;
+            line-height: 1.3;
+            color: var(--primary-text);
         }
 
-        h1 { font-size: 2.5em; }
-        h2 { font-size: 2em; }
-        h3 { font-size: 1.5em; }
+        h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+        h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+        h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            overflow-x: hidden;
+            padding: 0 clamp(1rem, 3vw, 2rem);
         }
 
-        /* Header */
         .header-nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #fff;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
         }
 
         .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 4px 20px;
         }
 
         .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 0.95em;
+            font-weight: 600;
+            font-size: 1.1rem;
             color: var(--primary-text);
         }
 
@@ -85,248 +73,191 @@
             color: var(--accent-color);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9em;
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .back-link:hover {
-            color: var(--accent-hover);
-        }
+        .back-link:hover { color: var(--accent-hover); }
 
-        /* Case Study Content */
         .case-study-hero {
-            background: linear-gradient(135deg, var(--success-color), #2f855a);
+            background: linear-gradient(135deg, var(--primary-text) 0%, #1a202c 100%);
             color: white;
-            padding: 80px 0 60px;
+            padding: clamp(5rem, 10vw, 8rem) 0 clamp(3rem, 6vw, 4rem);
             text-align: center;
+            margin-top: 4rem;
         }
 
         .case-study-hero h1 {
-            margin-bottom: 20px;
+            color: white;
+            margin-bottom: 1rem;
         }
 
         .case-study-hero p {
-            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(1rem, 2vw, 1.125rem);
             max-width: 800px;
             margin: 0 auto;
-            opacity: 0.9;
         }
 
-        .project-overview {
+        section {
+            padding: clamp(3rem, 6vw, 5rem) 0;
+        }
+
+        .section-light {
+            background-color: var(--background-light);
+        }
+
+        .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+            margin: 2rem 0;
         }
 
-        .overview-card {
+        .metric-card {
             background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            border-top: 4px solid var(--success-color);
-        }
-
-        .overview-card i {
-            font-size: 2.5em;
-            color: var(--success-color);
-            margin-bottom: 15px;
-        }
-
-        .overview-card h3 {
-            color: var(--primary-text);
-            margin-bottom: 10px;
-        }
-
-        .content-section {
-            margin: 60px 0;
-        }
-
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        .highlight-box {
-            background: var(--background-light);
-            padding: 30px;
-            border-radius: 12px;
-            border-left: 5px solid var(--success-color);
-        }
-
-        .tech-stack {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .tech-item {
-            background: white;
-            padding: 20px;
+            padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--card-shadow);
             text-align: center;
-            border: 2px solid var(--background-light);
+            border-top: 3px solid var(--accent-color);
+            transition: all 0.2s ease;
         }
 
-        .tech-item .icon {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow-hover);
         }
 
-        .tech-item.power-app .icon { color: #742774; }
-        .tech-item.sharepoint .icon { color: #0078d4; }
-        .tech-item.excel .icon { color: #217346; }
-        .tech-item.power-bi .icon { color: #f2c811; }
+        .metric-value {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--accent-color);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
 
-        ul.process-list {
+        .metric-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-description {
+            font-size: 0.875rem;
+            color: var(--secondary-text);
+            line-height: 1.5;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: clamp(1.5rem, 3vw, 2rem);
+            margin: 2rem 0;
+        }
+
+        .detail-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .detail-card h3 {
+            color: var(--primary-text);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-card h3 i {
+            color: var(--accent-color);
+        }
+
+        .detail-card ul {
             list-style: none;
             padding: 0;
         }
 
-        ul.process-list li {
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-            position: relative;
-            padding-left: 30px;
+        .detail-card li {
+            padding: 0.5rem 0;
+            color: var(--primary-text);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
         }
 
-        ul.process-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--success-color);
+        .detail-card li:last-child {
+            border-bottom: none;
+        }
+
+        .detail-card li:before {
+            content: "→";
+            color: var(--accent-color);
             font-weight: bold;
-            font-size: 1.2em;
+            margin-right: 0.5rem;
         }
 
-        /* Metric Highlights */
-        .metric-highlight {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: var(--success-color);
-            display: block;
-            margin: 10px 0;
-            line-height: 1;
-        }
-
-        .metric-label {
-            font-size: 0.85em;
-            color: var(--secondary-text);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-        }
-        .stat-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--success-color), #2f855a);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 1.1em;
-            margin: 5px;
-        }
-
-        /* Chart Container */
         .chart-container {
-            position: relative;
-            margin: 40px auto;
-            padding: 30px;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            word-wrap: break-word;
-        }
-
-        .chart-container h3 {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            margin: 2rem 0;
         }
 
         .chart-wrapper {
-            position: relative;
-            height: 300px;
-            margin: 20px 0;
-            overflow: hidden;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        @media (max-width: 768px) {
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-            .chart-wrapper {
-                height: 250px;
-            }
-            .chart-container {
-                padding: 20px;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .result-item {
+        .reasoning-box {
             background: white;
-            padding: 20px;
+            padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            text-align: center;
+            box-shadow: var(--card-shadow);
+            border-left: 4px solid var(--accent-color);
+            margin: 2rem 0;
         }
 
-        .result-item .icon {
-            font-size: 2em;
-            color: var(--success-color);
-            margin-bottom: 10px;
+        .reasoning-box h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .reasoning-box p {
+            color: var(--primary-text);
+            line-height: 1.7;
+            margin-bottom: 1rem;
         }
 
         .footer {
-            padding: 20px 0;
-            background-color: #2c3e50;
-            color: #ccc;
-            font-size: 0.9em;
-            margin-top: 60px;
+            background-color: #1a202c;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
         }
 
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--accent-hover);
         }
 
         @media (max-width: 768px) {
-            .two-column {
+            .metrics-grid, .details-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .project-overview, .tech-stack {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                gap: 10px;
+            .case-study-hero {
+                padding: 4rem 0 2.5rem;
             }
         }
     </style>
@@ -341,501 +272,178 @@
         </div>
     </nav>
 
-    <section class="case-study-hero">
+    <div class="case-study-hero">
         <div class="container">
-            <h1><i class="fas fa-warehouse"></i> Enterprise Inventory Management Platform</h1>
-            <p>Led end-to-end technical program delivering integrated Power Platform solution with comprehensive stakeholder management, vendor coordination, and enterprise-wide UAT strategy</p>
-            <div style="margin-top: 20px;">
-                <span class="stat-badge"><i class="fas fa-users"></i> 50+ Users Trained</span>
-                <span class="stat-badge"><i class="fas fa-chart-line"></i> 95% Accuracy Improvement</span>
-                <span class="stat-badge"><i class="fas fa-clock"></i> 40% Time Reduction</span>
-            </div>
+            <h1><i class="fas fa-boxes"></i> Inventory Tracking App</h1>
+            <p>End-to-end system design, implementation, and training using Power App, SharePoint, Excel, and Power BI</p>
         </div>
-    </section>
+    </div>
 
-    <section class="content-section">
+    <section>
         <div class="container">
-            <div class="project-overview">
-                <div class="overview-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Technical Solution</h3>
-                    <p><strong>Microsoft Power Platform</strong> ecosystem with SharePoint, Power BI, and Excel integration architecture</p>
-                </div>
-                <div class="overview-card">
-                    <i class="fas fa-users"></i>
-                    <h3>Scope & Scale</h3>
-                    <p><strong>50+ stakeholders</strong> across multiple departments with comprehensive training program</p>
-                </div>
-                <div class="overview-card">
-                    <i class="fas fa-clock"></i>
-                    <h3>Delivery Timeline</h3>
-                    <p><strong>4-month program</strong> - requirements, design, development, UAT, training, and deployment</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="container">
-            <h2>Technology Architecture</h2>
-            <div class="tech-stack">
-                <div class="tech-item power-app">
-                    <div class="icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h4>Power App</h4>
-                    <p>Custom mobile interface for inventory management</p>
-                </div>
-                <div class="tech-item sharepoint">
-                    <div class="icon"><i class="fas fa-share-alt"></i></div>
-                    <h4>SharePoint</h4>
-                    <p>Centralized data storage and collaboration platform</p>
-                </div>
-                <div class="tech-item excel">
-                    <div class="icon"><i class="fas fa-table"></i></div>
-                    <h4>Excel Database</h4>
-                    <p>Backend data management and calculations</p>
-                </div>
-                <div class="tech-item power-bi">
-                    <div class="icon"><i class="fas fa-chart-bar"></i></div>
-                    <h4>Power BI</h4>
-                    <p>Advanced analytics and waste tracking reports</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-        <section class="content-section" style="background: var(--background-light);">
-        <div class="container" style="padding: 60px 20px;">
-            <h2>Challenge & Approach</h2>
-            <div class="two-column">
-                <div>
-                    <h3>Key Challenges</h3>
-                    <ul class="process-list">
-                        <li><strong>Manual Processes:</strong> Paper-based inventory lacking real-time visibility</li>
-                        <li><strong>Data Silos:</strong> Disconnected systems with no integration</li>
-                        <li><strong>Scalability:</strong> Need to support 50+ concurrent mobile users</li>
-                        <li><strong>Change Management:</strong> Transitioning from legacy to digital</li>
-                    </ul>
-                </div>
-                <div class="highlight-box">
-                    <h3>TPM Strategy</h3>
-                    <p><strong>Solution Architecture:</strong> Designed integrated Power Platform ecosystem with SharePoint, Excel, and Power BI.</p>
-                    <p><strong>Vendor Management:</strong> Negotiated Microsoft licensing achieving 20% cost savings.</p>
-                    <p><strong>UAT Excellence:</strong> 98% test pass rate with 20 business users across 3-week UAT phase.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="container">
-            <h2>Technology Stack</h2>
-            <div class="tech-stack">
-                <div class="tech-item power-app">
-                    <div class="icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h4>Power Apps</h4>
-                    <p>Mobile-first UI with barcode scanning</p>
-                </div>
-                <div class="tech-item sharepoint">
-                    <div class="icon"><i class="fas fa-share-alt"></i></div>
-                    <h4>SharePoint</h4>
-                    <p>Enterprise data storage & RBAC</p>
-                </div>
-                <div class="tech-item excel">
-                    <div class="icon"><i class="fas fa-table"></i></div>
-                    <h4>Excel Integration</h4>
-                    <p>Automated calculations & validation</p>
-                </div>
-                <div class="tech-item power-bi">
-                    <div class="icon"><i class="fas fa-chart-bar"></i></div>
-                    <h4>Power BI</h4>
-                    <p>Real-time dashboards & analytics</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section" style="background: var(--background-light);">
-        <div class="container" style="padding: 60px 20px;">
-            <h2>Performance Metrics & Adoption Trends</h2>
+            <h2 style="text-align: center; margin-bottom: 3rem;">Measurable Success</h2>
             
-            <div class="charts-grid">
-                <div class="chart-container">
-                    <h3 style="text-align: center; margin-bottom: 20px;">User Adoption Curve</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="adoptionChart"></canvas>
-                    </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Real-Time Visibility</div>
+                    <div class="metric-description">Complete inventory tracking with Power BI dashboards and waste reports</div>
                 </div>
-                
-                <div class="chart-container">
-                    <h3 style="text-align: center; margin-bottom: 20px;">Accuracy Improvement</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="accuracyChart"></canvas>
-                    </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">90%</div>
+                    <div class="metric-label">Process Efficiency</div>
+                    <div class="metric-description">Streamlined operations through UI/UX design and staff training</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">80%</div>
+                    <div class="metric-label">Space Optimization</div>
+                    <div class="metric-description">Improved space planning and quality control processes</div>
                 </div>
             </div>
 
-            <div class="charts-grid">
-                <div class="chart-container">
-                    <h3 style="text-align: center; margin-bottom: 20px;">Time Savings Analysis</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="efficiencyChart"></canvas>
-                    </div>
-                </div>
-                
-                <div class="chart-container">
-                    <h3 style="text-align: center; margin-bottom: 20px;">Platform Usage Distribution</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="usageChart"></canvas>
-    <section class="content-section">
+            <div class="reasoning-box">
+                <h3><i class="fas fa-lightbulb"></i> Why This Matters</h3>
+                <p><strong>Business Impact:</strong> By designing and implementing a comprehensive inventory tracking system using Power App, SharePoint list, Excel database, and custom forms, we transformed manual tracking into an automated, real-time visibility solution. The UI/UX design ensured staff adoption and system usability.</p>
+                <p><strong>Strategic Value:</strong> Power BI dashboards and waste tracking reports provided actionable insights for space planning and quality control. This end-to-end solution—from system design to staff training—created a sustainable, scalable inventory management framework that directly improved operational efficiency and reduced waste.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-light">
         <div class="container">
-            <h2>Quantifiable Impact</h2>
-            <div class="results-grid">
-                <div class="result-item">
-                    <div class="icon"><i class="fas fa-check-circle"></i></div>
-                    <span class="metric-highlight">95%</span>
-                    <h3>Inventory Accuracy</h3>
-                    <p class="metric-label">Eliminating manual errors</p>
-                </div>
-                <div class="result-item">
-                    <div class="icon"><i class="fas fa-users-cog"></i></div>
-                    <span class="metric-highlight">50+</span>
-                    <h3>Users Trained</h3>
-                    <p class="metric-label">Cross-departmental adoption</p>
-                </div>
-                <div class="result-item">
-                    <div class="icon"><i class="fas fa-clock"></i></div>
-                    <span class="metric-highlight">40%</span>
-                    <h3>Time Savings</h3>
-                    <p class="metric-label">Reduction in manual tasks</p>
-                </div>
-                <div class="result-item">
-                    <div class="icon"><i class="fas fa-rocket"></i></div>
-                    <span class="metric-highlight">4mo</span>
-                    <h3>Delivery Time</h3>
-                    <p class="metric-label">On-time, on-budget</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section" style="background: var(--background-light);">
-        <div class="container" style="padding: 60px 20px;">
-            <h2>Senior TPM Insights</h2>
-            <div class="highlight-box">
-                <p><strong>Solution Architecture:</strong> Led technical evaluation of Power Platform capabilities, designed scalable integration architecture ensuring future growth capacity.</p>
-                
-                <p><strong>Vendor & Resource Management:</strong> Negotiated Microsoft licensing achieving 20% cost savings. Managed blended team ensuring knowledge transfer.</p>
-                
-                <p><strong>UAT Excellence:</strong> Coordinated 20 business users across UAT phase, achieving 98% test pass rate before production deployment.</p>
-                
-                <p><strong>Change Management Success:</strong> Achieved 90%+ user adoption within first month through strategic training and support programs.</p>
-            </div>
-        </div>
-    </section>
-                    <h3>Inventory Accuracy</h3>
-                    <p class="metric-label">Real-time data validation eliminating manual entry errors</p>
-                </div>
-                <div class="result-item">
-                    <div class="icon"><i class="fas fa-users-cog"></i></div>
-                    <span class="metric-highlight">50+</span>
-                    <h3>Users Onboarded</h3>
-                    <p class="metric-label">Cross-departmental adoption with 90%+ user satisfaction rating</p>
-                </div>
-                <div class="result-item">
-                    <div class="icon"><i class="fas fa-clock"></i></div>
-                    <span class="metric-highlight">40%</span>
-                    <h3>Efficiency Gain</h3>
-                    <p class="metric-label">Reduction in manual data entry and reporting time</p>
-                </div>
-                <div class="result-item">
-                    <div class="icon"><i class="fas fa-recycle"></i></div>
-                    <span class="metric-highlight">60%</span>
-                    <h3>Waste Reduction</h3>
-                    <p class="metric-label">Improved tracking and analytics driving better decision-making</p>
-                </div>
-                <div class="result-item">
-                    <div class="icon"><i class="fas fa-mobile-alt"></i></div>
-                    <span class="metric-highlight">100%</span>
-                    <h3>Mobile Accessibility</h3>
-                    <p class="metric-label">Full functionality on tablets and smartphones for field use</p>
-                </div>
-                <div class="result-item">
-                    <div class="icon"><i class="fas fa-rocket"></i></div>
-                    <span class="metric-highlight">4mo</span>
-                    <h3>Time to Market</h3>
-                    <p class="metric-label">On-time, on-budget delivery from requirements to production</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section" style="background: var(--background-light);">
-        <div class="container" style="padding: 60px 20px;">
-            <h2>Senior Technical Project Manager Insights</h2>
-            <div class="highlight-box">
-                <h3>Strategic Program Leadership</h3>
-                <p><strong>Stakeholder Management & Governance:</strong> Established steering committee with executive sponsors and department heads. Conducted bi-weekly status meetings presenting progress against milestones, budget variance, and risk mitigation plans. Achieved 100% stakeholder buy-in through transparent communication and early wins demonstrations.</p>
-                
-                <p><strong>Technical Oversight & Architecture:</strong> Led solution architecture design sessions with IT and business teams. Evaluated Power Platform capabilities against requirements, made build-vs-buy recommendations, and ensured scalability for future growth. Managed technical dependencies and integration risks proactively.</p>
-                
-                <p><strong>Vendor & Resource Management:</strong> Negotiated Microsoft licensing agreements achieving 20% cost savings. Coordinated with Microsoft support for technical escalations. Managed blended team of internal developers and external consultants ensuring knowledge transfer.</p>
-                
-                <p><strong>Quality & UAT Strategy:</strong> Developed comprehensive UAT plan with entry/exit criteria, test case coverage, and defect management process. Coordinated 20 business users across UAT phase, achieving 98% test case pass rate before production deployment.</p>
-                
-                <p><strong>Change Management & Training:</strong> Created change management plan addressing resistance to digital transformation. Developed role-based training programs with hands-on labs. Achieved 90%+ user adoption within first month through strategic communication and support.</p>
-                
-                <p><strong>Metrics & Continuous Improvement:</strong> Implemented Power BI dashboard tracking adoption metrics, system performance, and ROI indicators. Established continuous improvement process with monthly enhancement releases based on user feedback.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="container">
-            <h2>Implementation Process</h2>
-            <div class="two-column">
-                <div>
-                    <h3>System Design & Development</h3>
-                    <ul class="process-list">
-                        <li><strong>Requirements Analysis:</strong> Comprehensive stakeholder interviews and workflow mapping</li>
-                        <li><strong>UI/UX Design:</strong> Intuitive interface design focused on mobile-first approach</li>
-                        <li><strong>Power App Development:</strong> Custom app with barcode scanning and real-time updates</li>
-                        <li><strong>SharePoint Integration:</strong> Centralized list management with permission controls</li>
-                        <li><strong>Excel Database Setup:</strong> Automated calculations and data validation rules</li>
-                        <li><strong>Power BI Dashboards:</strong> Executive dashboards and operational reports</li>
+            <h2 style="text-align: center; margin-bottom: 3rem;">Implementation Details</h2>
+            
+            <div class="details-grid">
+                <div class="detail-card">
+                    <h3><i class="fas fa-layer-group"></i> System Architecture</h3>
+                    <ul>
+                        <li>Power App interface design</li>
+                        <li>SharePoint list backend</li>
+                        <li>Excel database integration</li>
+                        <li>Custom forms development</li>
                     </ul>
                 </div>
-                <div>
-                    <h3>Training & Deployment</h3>
-                    <ul class="process-list">
-                        <li><strong>Staff Training Program:</strong> Comprehensive 2-week training schedule</li>
-                        <li><strong>Pilot Testing:</strong> 2-week pilot with core user group</li>
-                        <li><strong>Phased Rollout:</strong> Department-by-department implementation</li>
-                        <li><strong>Support Documentation:</strong> User manuals and video tutorials</li>
-                        <li><strong>Quality Control Integration:</strong> Built-in validation and approval workflows</li>
-                        <li><strong>Space Planning Features:</strong> Visual layout tools and optimization algorithms</li>
+
+                <div class="detail-card">
+                    <h3><i class="fas fa-paint-brush"></i> UI/UX & Training</h3>
+                    <ul>
+                        <li>User-centered interface design</li>
+                        <li>Staff training program</li>
+                        <li>Process documentation</li>
+                        <li>Change management support</li>
+                    </ul>
+                </div>
+
+                <div class="detail-card">
+                    <h3><i class="fas fa-chart-bar"></i> Analytics & Optimization</h3>
+                    <ul>
+                        <li>Power BI dashboard design</li>
+                        <li>Waste tracking reports</li>
+                        <li>Space planning tools</li>
+                        <li>Quality control processes</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="content-section" style="background: var(--background-light);">
-        <div class="container" style="padding: 60px 20px;">
-            <h2>Key Features & Capabilities</h2>
-            <div class="tech-stack">
-                <div class="tech-item">
-                    <div class="icon" style="color: var(--accent-color);"><i class="fas fa-barcode"></i></div>
-                    <h4>Barcode Scanning</h4>
-                    <p>Mobile barcode scanning for instant inventory updates</p>
-                </div>
-                <div class="tech-item">
-                    <div class="icon" style="color: var(--success-color);"><i class="fas fa-sync-alt"></i></div>
-                    <h4>Real-time Sync</h4>
-                    <p>Instant data synchronization across all platforms</p>
-                </div>
-                <div class="tech-item">
-                    <div class="icon" style="color: var(--gold-accent);"><i class="fas fa-chart-line"></i></div>
-                    <h4>Analytics Dashboard</h4>
-                    <p>Comprehensive Power BI reports and waste tracking</p>
-                </div>
-                <div class="tech-item">
-                    <div class="icon" style="color: #e53e3e;"><i class="fas fa-map-marked-alt"></i></div>
-                    <h4>Space Planning</h4>
-                    <p>Visual layout management and optimization tools</p>
-                </div>
-                <div class="tech-item">
-                    <div class="icon" style="color: #805ad5;"><i class="fas fa-shield-alt"></i></div>
-                    <h4>Quality Control</h4>
-                    <p>Built-in approval workflows and validation checks</p>
-                </div>
-                <div class="tech-item">
-                    <div class="icon" style="color: #319795;"><i class="fas fa-mobile-alt"></i></div>
-                    <h4>Mobile Access</h4>
-                    <p>Full functionality on mobile devices and tablets</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-section">
+    <section>
         <div class="container">
-            <h2>Results & Impact</h2>
-            <div class="highlight-box">
-                <h3>Quantifiable Outcomes</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5em; color: var(--success-color); font-weight: bold;">95%</div>
-                        <p>Inventory accuracy improvement</p>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5em; color: var(--accent-color); font-weight: bold;">50+</div>
-                        <p>Staff members trained</p>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5em; color: var(--gold-accent); font-weight: bold;">40%</div>
-                        <p>Reduction in manual tasks</p>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 2.5em; color: #e53e3e; font-weight: bold;">60%</div>
-                        <p>Waste tracking improvement</p>
-                    </div>
+            <h2 style="text-align: center; margin-bottom: 3rem;">Impact Visualization</h2>
+            
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="efficiencyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container" style="margin-top: 3rem;">
+                <div class="chart-wrapper">
+                    <canvas id="adoptionChart"></canvas>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="content-section" style="background: var(--background-light);">
-        <div class="container" style="padding: 60px 20px;">
-            <h2>Project Management Insights</h2>
-            <div class="highlight-box">
-                <h3>Key Success Factors</h3>
-                <p><strong>Stakeholder Engagement:</strong> Early and continuous involvement of end users ensured the solution met real-world needs and achieved high adoption rates.</p>
-                <p><strong>Iterative Development:</strong> Agile methodology with regular prototyping allowed for continuous refinement and user feedback integration.</p>
-                <p><strong>Comprehensive Training:</strong> Investment in thorough staff training was crucial for successful adoption and long-term sustainability.</p>
-                <p><strong>Platform Integration:</strong> Leveraging the Microsoft ecosystem provided seamless data flow and reduced integration complexity.</p>
-                <p><strong>Change Management:</strong> Structured approach to change management helped staff transition from manual processes to digital workflows.</p>
-            </div>
+    <div class="footer">
+        <div class="container">
+            <p>&copy; 2025 Jasmine A.R.T. | <a href="index.html">Back to Portfolio</a></p>
         </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container footer-content">
-            <p>&copy; 2025 Jasmine A.R.T., PMP, CSM | Professional Project Manager</p>
-            <div>
-                <a href="index.html" style="color: #ccc; text-decoration: none;">Back to Portfolio</a>
-            </div>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // Chart.js Configuration - Monochrome + Blue
-        const chartColors = {
-            primary: '#2b6cb0',    // Blue
-            secondary: '#4a5568',  // Grey
-            dark: '#1a1a1a',       // Almost Black
-            light: '#999999'       // Light Grey
-        };
-
-        // User Adoption Chart
-        const adoptionCtx = document.getElementById('adoptionChart').getContext('2d');
-        new Chart(adoptionCtx, {
-            type: 'line',
-            data: {
-                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 6', 'Week 8', 'Week 12', 'Week 16'],
-                datasets: [{
-                    label: 'Active Users',
-                    data: [5, 12, 23, 35, 42, 48, 52, 53],
-                    borderColor: chartColors.secondary,
-                    backgroundColor: chartColors.secondary + '20',
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: true, position: 'top' }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 60,
-                        title: { display: true, text: 'Number of Users' }
-                    }
-                }
-            }
-        });
-
-        // Accuracy Improvement Chart
-        const accuracyCtx = document.getElementById('accuracyChart').getContext('2d');
-        new Chart(accuracyCtx, {
-            type: 'line',
-            data: {
-                labels: ['Baseline', 'Month 1', 'Month 2', 'Month 3', 'Month 4'],
-                datasets: [{
-                    label: 'Inventory Accuracy (%)',
-                    data: [65, 75, 83, 89, 95],
-                    borderColor: chartColors.primary,
-                    backgroundColor: chartColors.primary + '20',
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: true, position: 'top' }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        min: 60,
-                        max: 100,
-                        title: { display: true, text: 'Accuracy (%)' }
-                    }
-                }
-            }
-        });
-
-        // Efficiency/Time Savings Chart
         const efficiencyCtx = document.getElementById('efficiencyChart').getContext('2d');
         new Chart(efficiencyCtx, {
             type: 'bar',
             data: {
-                labels: ['Manual Entry', 'Report Generation', 'Stock Takes', 'Quality Checks'],
+                labels: ['Manual Process', 'Automated System'],
                 datasets: [{
-                    label: 'Before (hours/week)',
-                    data: [15, 8, 12, 6],
-                    backgroundColor: chartColors.accent + '60'
-                }, {
-                    label: 'After (hours/week)',
-                    data: [4, 2, 4, 2],
-                    backgroundColor: chartColors.success + '80'
+                    label: 'Process Efficiency (%)',
+                    data: [45, 90],
+                    backgroundColor: ['rgba(124, 156, 191, 0.3)', 'rgba(124, 156, 191, 0.8)'],
+                    borderColor: ['#7c9cbf', '#7c9cbf'],
+                    borderWidth: 2
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
                 plugins: {
-                    legend: { position: 'top' }
+                    title: {
+                        display: true,
+                        text: 'Process Efficiency Improvement: 90% Achievement',
+                        font: { size: 16, weight: '600' },
+                        color: '#2d3748'
+                    }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        title: { display: true, text: 'Hours per Week' }
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Efficiency Level (%)'
+                        }
                     }
                 }
             }
         });
 
-        // Platform Usage Distribution
-        const usageCtx = document.getElementById('usageChart').getContext('2d');
-        new Chart(usageCtx, {
-            type: 'doughnut',
+        const adoptionCtx = document.getElementById('adoptionChart').getContext('2d');
+        new Chart(adoptionCtx, {
+            type: 'line',
             data: {
-                labels: ['Mobile', 'Desktop', 'Tablet'],
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
                 datasets: [{
-                    data: [65, 25, 10],
-                    backgroundColor: [
-                        chartColors.success,
-                        chartColors.primary,
-                        chartColors.gold
-                    ],
-                    borderWidth: 0
+                    label: 'Staff Adoption Rate (%)',
+                    data: [30, 50, 70, 85, 95, 100],
+                    backgroundColor: 'rgba(124, 156, 191, 0.1)',
+                    borderColor: '#7c9cbf',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#7c9cbf'
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
                 plugins: {
-                    legend: { position: 'bottom' },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.label + ': ' + context.parsed + '%';
-                            }
+                    title: {
+                        display: true,
+                        text: 'System Adoption Following Training Program',
+                        font: { size: 16, weight: '600' },
+                        color: '#2d3748'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Adoption Rate (%)'
                         }
                     }
                 }
