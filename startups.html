@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Ups | Jasmine A.R.T.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-text: #1a1a1a;
+            --secondary-text: #4a5568;
+            --background-light: #f7f7f7;
+            --accent-color: #2b6cb0;
+            --accent-hover: #1e4d7a;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary-text);
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.5em;
+        }
+
+        h1 { font-size: 2.5em; }
+        h2 { font-size: 2em; }
+        h3 { font-size: 1.5em; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #e0e7ff;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-hover);
+        }
+
+        .content-section {
+            padding: 60px 0;
+        }
+
+        .content-section:nth-child(even) {
+            background-color: var(--background-light);
+        }
+
+        .venture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .venture-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .venture-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .venture-header {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .venture-header i {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .venture-header h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .venture-header .status {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-top: 10px;
+        }
+
+        .venture-body {
+            padding: 30px;
+        }
+
+        .venture-body p {
+            color: var(--secondary-text);
+            margin-bottom: 20px;
+        }
+
+        .key-achievements {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-achievements li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: var(--secondary-text);
+        }
+
+        .key-achievements li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .skills-section {
+            background: var(--background-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .skills-section h4 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: white;
+            color: var(--secondary-text);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            border: 1px solid var(--border-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+            margin-right: 15px;
+            margin-top: 15px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .entrepreneur-approach {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .approach-item {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .approach-item i {
+            font-size: 2.5em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .approach-item h4 {
+            color: var(--primary-text);
+            margin-bottom: 10px;
+        }
+
+        .approach-item p {
+            color: var(--secondary-text);
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.6em; }
+            .venture-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="container">
+            <h1><i class="fas fa-lightbulb"></i> Entrepreneurial Ventures</h1>
+            <p>Innovation, Strategy & Business Development</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+    </div>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Active & Past Ventures</h2>
+            <p style="color: var(--secondary-text); max-width: 800px; margin-bottom: 40px;">
+                Applying project management principles to entrepreneurial endeavors, combining strategic planning, market analysis, and execution excellence to build sustainable businesses.
+            </p>
+
+            <div class="venture-grid">
+                <!-- Venture 1 -->
+                <div class="venture-card">
+                    <div class="venture-header">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h3>E-Commerce Platform</h3>
+                        <span class="status">Launched 2024</span>
+                    </div>
+                    <div class="venture-body">
+                        <p>Multi-channel retail platform leveraging Shopify, social commerce, and digital marketing to reach 25K+ customers with organic and paid strategies.</p>
+                        <h4 style="color: var(--accent-color); margin-bottom: 10px;">Key Achievements:</h4>
+                        <ul class="key-achievements">
+                            <li>4.8x Return on Ad Spend (ROAS)</li>
+                            <li>3.2% conversion rate optimization</li>
+                            <li>25,000+ social media following</li>
+                            <li>$75K budget managed efficiently</li>
+                        </ul>
+                        <div class="skills-section">
+                            <h4>Skills Applied</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">E-Commerce</span>
+                                <span class="skill-tag">Digital Marketing</span>
+                                <span class="skill-tag">Analytics</span>
+                                <span class="skill-tag">Growth Strategy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Venture 2 -->
+                <div class="venture-card">
+                    <div class="venture-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Consulting Services</h3>
+                        <span class="status">Active</span>
+                    </div>
+                    <div class="venture-body">
+                        <p>Independent project management and digital transformation consulting for SMBs, focusing on process automation, technical implementation, and organizational change.</p>
+                        <h4 style="color: var(--accent-color); margin-bottom: 10px;">Key Achievements:</h4>
+                        <ul class="key-achievements">
+                            <li>Multiple successful client engagements</li>
+                            <li>Process automation implementations</li>
+                            <li>Change management programs</li>
+                            <li>Technical solution architecture</li>
+                        </ul>
+                        <div class="skills-section">
+                            <h4>Skills Applied</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Consulting</span>
+                                <span class="skill-tag">PM Expertise</span>
+                                <span class="skill-tag">Client Relations</span>
+                                <span class="skill-tag">Strategy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Venture 3 -->
+                <div class="venture-card">
+                    <div class="venture-header">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Tech Startup Incubation</h3>
+                        <span class="status">In Development</span>
+                    </div>
+                    <div class="venture-body">
+                        <p>Early-stage technology startup focused on SaaS solutions for project management automation, currently in market research and MVP development phase.</p>
+                        <h4 style="color: var(--accent-color); margin-bottom: 10px;">Current Focus:</h4>
+                        <ul class="key-achievements">
+                            <li>Market validation & research</li>
+                            <li>Product roadmap development</li>
+                            <li>Technical architecture planning</li>
+                            <li>Investor pitch preparation</li>
+                        </ul>
+                        <div class="skills-section">
+                            <h4>Skills Applied</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Product Development</span>
+                                <span class="skill-tag">Market Research</span>
+                                <span class="skill-tag">SaaS</span>
+                                <span class="skill-tag">Fundraising</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 style="text-align: center;">Entrepreneurial Approach</h2>
+            <p style="text-align: center; color: var(--secondary-text); max-width: 700px; margin: 0 auto 40px;">
+                Leveraging technical project management methodologies with entrepreneurial mindset to build scalable, sustainable businesses.
+            </p>
+            
+            <div class="entrepreneur-approach">
+                <div class="approach-item">
+                    <i class="fas fa-search-dollar"></i>
+                    <h4>Market Analysis</h4>
+                    <p>Data-driven research to identify opportunities and validate product-market fit</p>
+                </div>
+
+                <div class="approach-item">
+                    <i class="fas fa-tasks"></i>
+                    <h4>Agile Execution</h4>
+                    <p>Iterative development with continuous feedback and rapid pivoting</p>
+                </div>
+
+                <div class="approach-item">
+                    <i class="fas fa-users"></i>
+                    <h4>Customer-Centric</h4>
+                    <p>Building solutions that solve real problems for target audiences</p>
+                </div>
+
+                <div class="approach-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <h4>Metrics-Driven</h4>
+                    <p>KPI tracking and analytics to inform strategic decisions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--background-light);">
+        <div class="container">
+            <h2 style="text-align: center;">Core Competencies</h2>
+            <div style="max-width: 900px; margin: 40px auto 0;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        <h3 style="color: var(--accent-color); font-size: 1.2em; margin-bottom: 15px;">Business Strategy</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--secondary-text);">
+                            <li style="padding: 5px 0;">✓ Business Planning</li>
+                            <li style="padding: 5px 0;">✓ Financial Modeling</li>
+                            <li style="padding: 5px 0;">✓ Competitive Analysis</li>
+                            <li style="padding: 5px 0;">✓ Go-to-Market Strategy</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        <h3 style="color: var(--accent-color); font-size: 1.2em; margin-bottom: 15px;">Operations</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--secondary-text);">
+                            <li style="padding: 5px 0;">✓ Process Design</li>
+                            <li style="padding: 5px 0;">✓ Vendor Management</li>
+                            <li style="padding: 5px 0;">✓ Resource Optimization</li>
+                            <li style="padding: 5px 0;">✓ Quality Assurance</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        <h3 style="color: var(--accent-color); font-size: 1.2em; margin-bottom: 15px;">Growth & Marketing</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--secondary-text);">
+                            <li style="padding: 5px 0;">✓ Digital Marketing</li>
+                            <li style="padding: 5px 0;">✓ Customer Acquisition</li>
+                            <li style="padding: 5px 0;">✓ Brand Development</li>
+                            <li style="padding: 5px 0;">✓ Performance Analytics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container" style="text-align: center;">
+            <h2>Interested in Collaboration?</h2>
+            <p style="color: var(--secondary-text); max-width: 600px; margin: 0 auto 30px;">
+                Whether you're looking for a co-founder, advisor, or project management expertise for your venture, let's explore opportunities to work together.
+            </p>
+            <a href="mailto:jareevesthomas@gmail.com" class="btn btn-primary">Get In Touch</a>
+            <a href="index.html" class="btn btn-primary">Return to Portfolio</a>
+        </div>
+    </section>
+
+</body>
+</html>

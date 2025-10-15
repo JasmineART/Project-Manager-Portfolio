@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stakeholder Team Building Case Study | Jasmine A.R.T., PMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* --- Professional Monochrome + Blue Palette --- */
+        :root {
+            --primary-text: #1a1a1a;
+            --secondary-text: #4a5568;
+            --background-light: #f7f7f7;
+            --accent-color: #2b6cb0;
+            --accent-hover: #1e4d7a;
+            --success-color: #2b6cb0;
+            --gold-accent: #666666;
+            --border-color: #e0e0e0;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary-text);
+            line-height: 1.6;
+            background-color: #fff;
+            scroll-behavior: smooth;
+            padding-top: 40px;
+            overflow-x: hidden;
+            word-wrap: break-word;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.5em;
+            word-wrap: break-word;
+        }
+
+        h1 { font-size: 2.5em; }
+        h2 { font-size: 2em; }
+        h3 { font-size: 1.5em; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 20px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.95em;
+            color: var(--primary-text);
+        }
+
+        .back-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .back-link:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Case Study Content */
+        .case-study-hero {
+            background: linear-gradient(135deg, var(--team-color), #c05621);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .case-study-hero h1 {
+            margin-bottom: 20px;
+        }
+
+        .case-study-hero p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .project-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .overview-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border-top: 4px solid var(--team-color);
+        }
+
+        .overview-card i {
+            font-size: 2.5em;
+            color: var(--team-color);
+            margin-bottom: 15px;
+        }
+
+        .overview-card h3 {
+            color: var(--primary-text);
+            margin-bottom: 10px;
+        }
+
+        .content-section {
+            margin: 60px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .highlight-box {
+            background: var(--background-light);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid var(--team-color);
+        }
+
+        .initiative-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .initiative-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--team-color);
+        }
+
+        .initiative-card h4 {
+            color: var(--team-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .initiative-card .icon {
+            font-size: 1.5em;
+        }
+
+        ul.process-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.process-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        ul.process-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Chart Styles */
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 40px auto;
+            max-width: 900px;
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+
+        .chart-container h3 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .chart-wrapper {
+                height: 250px;
+            }
+            .chart-container {
+                padding: 20px;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .metric-highlight {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .metric-label {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--secondary-text);
+        }
+
+        .impact-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .impact-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border-top: 3px solid var(--success-color);
+        }
+
+        .impact-icon {
+            font-size: 2.5em;
+            color: var(--success-color);
+            margin-bottom: 15px;
+        }
+
+        .culture-change-diagram {
+            background: var(--background-light);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .change-phase {
+            display: flex;
+            align-items: flex-start;
+            margin: 25px 0;
+            gap: 20px;
+        }
+
+        .phase-icon {
+            background: var(--team-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+
+        .phase-content {
+            flex: 1;
+        }
+
+        .footer {
+            padding: 20px 0;
+            background-color: #2c3e50;
+            color: #ccc;
+            font-size: 0.9em;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-overview, .initiative-grid, .impact-metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .change-phase {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="header-nav">
+        <div class="container nav-content">
+            <div class="logo">Jasmine A.R.T. | PMP, CSM</div>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+        </div>
+    </nav>
+
+    <section class="case-study-hero">
+        <div class="container">
+            <h1><i class="fas fa-users-cog"></i> Organizational Change Management Initiative</h1>
+            <p>Led cross-functional transformation driving culture change, stakeholder engagement, and operational excellence through 5-phase change management program</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="project-overview">
+                <div class="overview-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>35% Engagement Increase</h3>
+                    <p>Technician participation in planning</p>
+                </div>
+                <div class="overview-card">
+                    <i class="fas fa-smile"></i>
+                    <h3>28% Satisfaction Gain</h3>
+                    <p>Employee satisfaction improvement</p>
+                </div>
+                <div class="overview-card">
+                    <i class="fas fa-comments"></i>
+                    <h3>4 Key Initiatives</h3>
+                    <p>Operational meetings, potlucks, engagement, processes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Challenge & OCM Strategy</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Organizational Challenges</h3>
+                    <ul class="process-list">
+                        <li><strong>Communication Breakdown:</strong> Discontinued operational meetings causing silos</li>
+                        <li><strong>Low Engagement:</strong> Minimal technician input in improvement initiatives</li>
+                        <li><strong>Process Gaps:</strong> No formal equipment/resource request workflow</li>
+                        <li><strong>Culture Issues:</strong> Declining morale and cross-departmental collaboration</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <h3>Change Management Approach</h3>
+                    <p><strong>Stakeholder Engagement:</strong> Multi-layered approach bridging management and frontline staff through structured touchpoints.</p>
+                    <p><strong>Cultural Transformation:</strong> Built inclusive environment fostering collaboration and employee empowerment.</p>
+                    <p><strong>Process Design:</strong> Implemented formal request workflows and feedback mechanisms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--background-light);">
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Culture Change Metrics & Engagement Trends</h2>
+            
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Employee Satisfaction Index</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="satisfactionChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Meeting Attendance & Participation</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="attendanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Technician Engagement in Planning</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="engagementChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Initiative Impact Distribution</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="initiativeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Key Change Initiatives</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div style="background: var(--background-light); padding: 20px; border-radius: 8px;">
+                    <h4><i class="fas fa-calendar-check"></i> Operational Meetings</h4>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Weekly cross-departmental touchpoints with structured agendas and action items</p>
+                </div>
+                <div style="background: var(--background-light); padding: 20px; border-radius: 8px;">
+                    <h4><i class="fas fa-utensils"></i> Team Potlucks</h4>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Monthly informal gatherings fostering cross-departmental relationships</p>
+                </div>
+                <div style="background: var(--background-light); padding: 20px; border-radius: 8px;">
+                    <h4><i class="fas fa-lightbulb"></i> Technician Engagement</h4>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Increased participation in planning and continuous improvement teams</p>
+                </div>
+                <div style="background: var(--background-light); padding: 20px; border-radius: 8px;">
+                    <h4><i class="fas fa-tools"></i> Equipment Requests</h4>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Formal request process with clear approval workflow and transparency</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Change Management Process</h2>
+            <div class="culture-change-diagram">
+                <div class="change-phase">
+                    <div class="phase-icon"><i class="fas fa-search"></i></div>
+                    <div class="phase-content">
+                        <h4>Assessment & Diagnosis</h4>
+                        <p>Conducted comprehensive stakeholder interviews and employee surveys to understand pain points, communication gaps, and engagement barriers. Identified root causes of organizational silos and low morale.</p>
+                    </div>
+                </div>
+
+                <div class="change-phase">
+                    <div class="phase-icon"><i class="fas fa-users"></i></div>
+                    <div class="phase-content">
+                        <h4>Stakeholder Engagement</h4>
+                        <p>Built coalition of support among department leaders and influential team members. Conducted one-on-one meetings to understand concerns and gain buy-in for cultural transformation initiatives.</p>
+                    </div>
+                </div>
+
+                <div class="change-phase">
+                    <div class="phase-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <div class="phase-content">
+                        <h4>Initiative Design</h4>
+                        <p>Co-created solutions with stakeholders including operational meeting structure, potluck format, engagement programs, and equipment request processes. Ensured initiatives addressed real needs.</p>
+                    </div>
+                </div>
+
+                <div class="change-phase">
+                    <div class="phase-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="phase-content">
+                        <h4>Pilot & Launch</h4>
+                        <p>Implemented initiatives with pilot teams before full rollout. Gathered feedback, made adjustments, and celebrated early wins to build momentum for organization-wide adoption.</p>
+                    </div>
+                </div>
+
+                <div class="change-phase">
+                    <div class="phase-icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="phase-content">
+                        <h4>Measurement & Reinforcement</h4>
+                        <p>Tracked engagement metrics, employee satisfaction, and participation rates. Recognized champions and continuously refined programs based on feedback and results.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--background-light);">
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Measurable Impact & Results</h2>
+            <div class="impact-metrics">
+                <div class="impact-card">
+                    <div class="impact-icon"><i class="fas fa-comments"></i></div>
+                    <h4>Communication Improvement</h4>
+                    <p>Significant increase in cross-departmental communication and information sharing</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon"><i class="fas fa-users"></i></div>
+                    <h4>Engagement Increase</h4>
+                    <p>Higher technician participation in improvement initiatives and planning sessions</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon"><i class="fas fa-smile"></i></div>
+                    <h4>Employee Satisfaction</h4>
+                    <p>Improved employee satisfaction through empowerment and repeatable work outcomes</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon"><i class="fas fa-cogs"></i></div>
+                    <h4>Process Efficiency</h4>
+                    <p>Streamlined equipment request process reducing delays and improving quality</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Key Achievements</h2>
+            <div class="highlight-box">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                    <div>
+                        <h4 style="color: var(--team-color); margin-bottom: 10px;">
+                            <i class="fas fa-calendar-alt"></i> Operational Meeting Revival
+                        </h4>
+                        <p>Successfully re-initiated regular operational meetings through strategic stakeholder engagement, creating consistent communication channels and accountability structures across the organization.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--success-color); margin-bottom: 10px;">
+                            <i class="fas fa-network-wired"></i> Cross-Departmental Collaboration
+                        </h4>
+                        <p>Increased communication and collaboration across departments through monthly team potlucks, breaking down silos and fostering a more unified organizational culture.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-color); margin-bottom: 10px;">
+                            <i class="fas fa-user-check"></i> Technician Empowerment
+                        </h4>
+                        <p>Dramatically increased technician engagement in improvement initiatives and planning processes, tapping into frontline expertise for better operational decisions.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--gold-accent); margin-bottom: 10px;">
+                            <i class="fas fa-clipboard-check"></i> Equipment Request Process
+                        </h4>
+                        <p>Empowered the team with a transparent, efficient process for requesting necessary equipment, enabling quality improvements and demonstrating organizational commitment to employee needs.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: #e53e3e; margin-bottom: 10px;">
+                            <i class="fas fa-heart"></i> Employee Satisfaction
+                        </h4>
+                        <p>Improved overall employee satisfaction through empowerment, clear processes, and repeatable work outcomes, creating a more positive and productive work environment.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: #319795; margin-bottom: 10px;">
+                            <i class="fas fa-award"></i> Culture Transformation
+                        </h4>
+                        <p>Established foundation for lasting cultural change with sustainable processes and genuine stakeholder buy-in, creating a more engaged and collaborative organization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--background-light);">
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Stakeholder Management Excellence</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Engagement Strategies</h3>
+                    <ul class="process-list">
+                        <li><strong>Active Listening:</strong> Regular one-on-one sessions with stakeholders at all levels</li>
+                        <li><strong>Transparent Communication:</strong> Open, honest dialogue about challenges and opportunities</li>
+                        <li><strong>Inclusive Decision-Making:</strong> Involving team members in solution design</li>
+                        <li><strong>Quick Wins:</strong> Demonstrating value through early, visible successes</li>
+                        <li><strong>Recognition Programs:</strong> Celebrating contributions and champions</li>
+                        <li><strong>Continuous Feedback:</strong> Regular check-ins and adjustment cycles</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Change Management Principles</h3>
+                    <ul class="process-list">
+                        <li><strong>People-First Approach:</strong> Prioritizing employee needs and concerns</li>
+                        <li><strong>Cultural Sensitivity:</strong> Respecting existing culture while driving improvement</li>
+                        <li><strong>Sustainable Change:</strong> Building processes that outlast initial momentum</li>
+                        <li><strong>Bottom-Up Input:</strong> Empowering frontline staff to shape initiatives</li>
+                        <li><strong>Leadership Alignment:</strong> Ensuring management support and modeling</li>
+                        <li><strong>Measured Progress:</strong> Tracking metrics to demonstrate impact</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Project Management Insights</h2>
+            <div class="highlight-box">
+                <h3>Critical Success Factors & Lessons Learned</h3>
+                <p><strong>Stakeholder Buy-In:</strong> Investing time in building genuine relationships and understanding stakeholder motivations was essential for overcoming resistance to change.</p>
+                <p><strong>Quick Wins Strategy:</strong> Starting with visible, achievable initiatives (like potlucks) built momentum and credibility for more complex changes (like operational meetings).</p>
+                <p><strong>Employee Voice:</strong> Creating formal channels for employee input (equipment requests, planning participation) transformed engagement by showing that opinions matter.</p>
+                <p><strong>Cultural Change Takes Time:</strong> Recognized that culture transformation is a journey, not a destination, requiring patience, persistence, and continuous reinforcement.</p>
+                <p><strong>Leadership Modeling:</strong> Ensuring leadership actively participated in and championed initiatives was crucial for establishing new cultural norms.</p>
+                <p><strong>Measurement Matters:</strong> Tracking both quantitative metrics (participation rates) and qualitative indicators (employee feedback) provided evidence of progress and areas for improvement.</p>
+                <p><strong>Informal Connections:</strong> Monthly potlucks demonstrated that informal relationship-building significantly enhances formal communication and collaboration effectiveness.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--background-light);">
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Long-Term Organizational Impact</h2>
+            <div class="highlight-box">
+                <h3>Sustainable Transformation</h3>
+                <p><strong>Cultural Foundation:</strong> Created lasting cultural shift toward collaboration, transparency, and employee empowerment that extends beyond individual initiatives.</p>
+                <p><strong>Process Sustainability:</strong> Established repeatable processes (meeting structures, request workflows) that continue to deliver value over time.</p>
+                <p><strong>Employee Retention:</strong> Improved satisfaction and engagement contribute to reduced turnover and stronger organizational knowledge retention.</p>
+                <p><strong>Quality Improvements:</strong> Equipment request process and technician engagement in planning drive continuous operational excellence.</p>
+                <p><strong>Organizational Resilience:</strong> Enhanced communication and collaboration strengthen organization's ability to adapt to future challenges.</p>
+                <p><strong>Leadership Development:</strong> Empowerment initiatives created opportunities for emerging leaders to develop and demonstrate capabilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Jasmine A.R.T., PMP, CSM | Professional Project Manager</p>
+            <div>
+                <a href="index.html" style="color: #ccc; text-decoration: none;">Back to Portfolio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Employee Satisfaction Index - Line Chart
+        const satisfactionCtx = document.getElementById('satisfactionChart').getContext('2d');
+        new Chart(satisfactionCtx, {
+            type: 'line',
+            data: {
+                labels: ['Baseline', 'Month 2', 'Month 4', 'Month 6', 'Month 8', 'Month 10'],
+                datasets: [{
+                    label: 'Satisfaction Score',
+                    data: [62, 68, 74, 79, 84, 90],
+                    borderColor: '#4a5568',
+                    backgroundColor: 'rgba(74, 85, 104, 0.1)',
+                    tension: 0.3,
+                    fill: true,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#4a5568'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Score: ' + context.parsed.y + '/100';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Meeting Attendance & Participation - Bar Chart
+        const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+        new Chart(attendanceCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Before Initiative', 'After Initiative'],
+                datasets: [{
+                    label: 'Attendance Rate',
+                    data: [45, 92],
+                    backgroundColor: ['#999999', '#2b6cb0']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + '% attendance';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Technician Engagement in Planning - Line Chart
+        const engagementCtx = document.getElementById('engagementChart').getContext('2d');
+        new Chart(engagementCtx, {
+            type: 'line',
+            data: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                datasets: [{
+                    label: 'Technician Participation',
+                    data: [15, 28, 40, 52],
+                    borderColor: '#2b6cb0',
+                    backgroundColor: 'rgba(43, 108, 176, 0.1)',
+                    tension: 0.3,
+                    fill: true,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#2b6cb0'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + '% participation';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 60,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Initiative Impact Distribution - Doughnut Chart
+        const initiativeCtx = document.getElementById('initiativeChart').getContext('2d');
+        new Chart(initiativeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Operational Meetings', 'Team Potlucks', 'Technician Engagement', 'Equipment Process'],
+                datasets: [{
+                    data: [30, 25, 30, 15],
+                    backgroundColor: [
+                        '#2b6cb0',
+                        '#4a5568',
+                        '#666666',
+                        '#999999'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '% impact';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

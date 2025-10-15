@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Website Case Study | Jasmine A.R.T., PMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* --- Professional Monochrome + Blue Palette --- */
+        :root {
+            --primary-text: #1a1a1a;
+            --secondary-text: #4a5568;
+            --background-light: #f7f7f7;
+            --accent-color: #2b6cb0;
+            --accent-hover: #1e4d7a;
+            --success-color: #2b6cb0;
+            --gold-accent: #666666;
+            --ecommerce-color: #666666;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary-text);
+            line-height: 1.6;
+            background-color: #fff;
+            scroll-behavior: smooth;
+            padding-top: 40px;
+            overflow-x: hidden;
+            word-wrap: break-word;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.5em;
+            word-wrap: break-word;
+        }
+
+        h1 { font-size: 2.5em; }
+        h2 { font-size: 2em; }
+        h3 { font-size: 1.5em; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 20px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.95em;
+            color: var(--primary-text);
+        }
+
+        .back-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .back-link:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Case Study Content */
+        .case-study-hero {
+            background: linear-gradient(135deg, var(--ecommerce-color), #c53030);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .case-study-hero h1 {
+            margin-bottom: 20px;
+        }
+
+        .case-study-hero p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .project-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .overview-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border-top: 4px solid var(--ecommerce-color);
+        }
+
+        .overview-card i {
+            font-size: 2.5em;
+            color: var(--ecommerce-color);
+            margin-bottom: 15px;
+        }
+
+        .overview-card h3 {
+            color: var(--primary-text);
+            margin-bottom: 10px;
+        }
+
+        .content-section {
+            margin: 60px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .highlight-box {
+            background: var(--background-light);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid var(--ecommerce-color);
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .platform-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border: 2px solid var(--background-light);
+        }
+
+        .platform-item .icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .platform-item.shopify .icon { color: #96bf48; }
+        .platform-item.instagram .icon { color: #e4405f; }
+        .platform-item.facebook .icon { color: #1877f2; }
+        .platform-item.ads .icon { color: var(--gold-accent); }
+
+        ul.process-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.process-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        ul.process-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Metric Highlights */
+        .metric-highlight {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--ecommerce-color);
+            display: block;
+            margin: 10px 0;
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 0.85em;
+            color: var(--secondary-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .stat-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--ecommerce-color), #c53030);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin: 5px;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+
+        .chart-container h3 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .chart-wrapper {
+                height: 250px;
+            }
+            .chart-container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .result-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .result-item .icon {
+            font-size: 2em;
+            color: var(--ecommerce-color);
+            margin-bottom: 10px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border-top: 3px solid var(--ecommerce-color);
+        }
+
+        .metric-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--ecommerce-color);
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            padding: 20px 0;
+            background-color: #2c3e50;
+            color: #ccc;
+            font-size: 0.9em;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-overview, .platform-grid, .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="header-nav">
+        <div class="container nav-content">
+            <div class="logo">Jasmine A.R.T. | PMP, CSM</div>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+        </div>
+    </nav>
+
+    <section class="case-study-hero">
+        <div class="container">
+            <h1><i class="fas fa-shopping-cart"></i> Digital Commerce Transformation</h1>
+            <p>Led full-stack e-commerce digital transformation program integrating platform development, third-party vendor management, omnichannel marketing strategy, and data-driven conversion optimization</p>
+            <div style="margin-top: 20px;">
+                <span class="stat-badge"><i class="fas fa-mobile-alt"></i> 95% Mobile Traffic</span>
+                <span class="stat-badge"><i class="fas fa-chart-line"></i> 4.8x ROAS</span>
+                <span class="stat-badge"><i class="fas fa-percent"></i> 3.2% Conversion Rate</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="project-overview">
+                <div class="overview-card">
+                    <i class="fas fa-store"></i>
+                    <h3>Technology Stack</h3>
+                    <p><strong>Shopify Enterprise</strong> with custom theme development and third-party API integrations</p>
+                </div>
+                <div class="overview-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Program Timeline</h3>
+                    <p><strong>3-month MVP launch</strong> with continuous optimization and A/B testing cycles</p>
+                </div>
+                <div class="overview-card">
+                    <i class="fas fa-share-alt"></i>
+                    <h3>Integration Ecosystem</h3>
+                    <p><strong>Multi-platform strategy</strong> - Instagram Shop, Facebook Commerce, Meta Ads Manager</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Platform Ecosystem</h2>
+            <div class="platform-grid">
+                <div class="platform-item shopify">
+                    <div class="icon"><i class="fab fa-shopify"></i></div>
+                    <h4>Shopify Store</h4>
+                    <p>Complete e-commerce platform with payment processing and inventory management</p>
+                </div>
+                <div class="platform-item instagram">
+                    <div class="icon"><i class="fab fa-instagram"></i></div>
+                    <h4>Instagram</h4>
+                    <p>Visual marketing and product showcase with shopping integration</p>
+                </div>
+                <div class="platform-item facebook">
+                    <div class="icon"><i class="fab fa-facebook"></i></div>
+                    <h4>Facebook</h4>
+                    <p>Community building and targeted advertising campaigns</p>
+                </div>
+                <div class="platform-item ads">
+                    <div class="icon"><i class="fas fa-bullhorn"></i></div>
+                    <h4>Targeted Ads</h4>
+                    <p>Strategic advertising campaigns and sales funnel optimization</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <section class="content-section" style="background: var(--background-light);">
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Challenge & Approach</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Key Objectives</h3>
+                    <ul class="process-list">
+                        <li><strong>Platform Selection:</strong> Evaluated 5+ platforms, selected Shopify for rapid MVP</li>
+                        <li><strong>Multi-Channel Strategy:</strong> Integrated Instagram, Facebook, and Meta Ads</li>
+                        <li><strong>Vendor Management:</strong> Onboarded 8 suppliers with quality SLAs</li>
+                        <li><strong>Performance:</strong> Achieved 95+ PageSpeed and sub-3s load times</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <h3>TPM Strategy</h3>
+                    <p><strong>Digital Transformation:</strong> Led end-to-end e-commerce launch from concept to $75K revenue in 3 months.</p>
+                    <p><strong>A/B Testing:</strong> Implemented experimentation framework testing 30+ variants, improving conversion by 40%.</p>
+                    <p><strong>ROI Focus:</strong> Multi-touch attribution model enabling data-driven budget optimization decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Technology Ecosystem</h2>
+            <div class="platform-grid">
+                <div class="platform-item shopify">
+                    <div class="icon"><i class="fab fa-shopify"></i></div>
+                    <h4>Shopify</h4>
+                    <p>Core platform with PCI compliance</p>
+                </div>
+                <div class="platform-item instagram">
+                    <div class="icon"><i class="fab fa-instagram"></i></div>
+                    <h4>Instagram Shop</h4>
+                    <p>45% of sales from social</p>
+                </div>
+                <div class="platform-item facebook">
+                    <div class="icon"><i class="fab fa-facebook"></i></div>
+                    <h4>Facebook Commerce</h4>
+                    <p>Community & brand awareness</p>
+                </div>
+                <div class="platform-item ads">
+                    <div class="icon"><i class="fas fa-bullhorn"></i></div>
+                    <h4>Meta Ads</h4>
+                    <p>4.8x ROAS programmatic ads</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--background-light);">
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Performance Analytics & Growth Trends</h2>
+            
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">ROAS Trend Over Time</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="roasChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Conversion Rate Optimization</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="conversionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Traffic Source Distribution</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Monthly Revenue Growth</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+                <div class="result-item">
+                    <div class="icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <span class="metric-highlight">2.3s</span>
+                    <h3>Page Load Time</h3>
+                    <p class="metric-label">Performance optimization achieving best-in-class user experience</p>
+                </div>
+                <div class="result-item">
+                    <div class="icon"><i class="fas fa-smile"></i></div>
+                    <span class="metric-highlight">85%</span>
+                    <h3>Customer Satisfaction</h3>
+                    <p class="metric-label">High NPS score from post-purchase surveys and quality control</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Senior Technical Project Manager Insights</h2>
+            <div class="highlight-box">
+                <h3>Strategic Program Leadership</h3>
+                <p><strong>Digital Transformation Strategy:</strong> Led comprehensive digital commerce initiative from concept to market launch. Developed business case securing $75K initial budget. Managed cross-functional collaboration between development, marketing, and operations teams delivering on-time MVP within 3 months.</p>
+                
+                <p><strong>Technology & Platform Selection:</strong> Conducted technical evaluation of 5 e-commerce platforms. Assessed criteria including TCO, scalability, integration capabilities, and time-to-market. Recommended Shopify based on extensive API ecosystem and rapid deployment capabilities.</p>
+                
+                <p><strong>Third-Party Integration & Vendor Management:</strong> Orchestrated complex integration strategy across Meta platforms (Instagram, Facebook, Ads Manager), payment processors (Stripe, PayPal), and analytics tools (GA4, Hotjar). Managed 8 supplier relationships with negotiated SLAs and quality guarantees.</p>
+                
+                <p><strong>A/B Testing & Conversion Optimization:</strong> Implemented data-driven experimentation framework testing 30+ variants of landing pages, product pages, and checkout flows. Increased baseline conversion rate by 40% through systematic optimization and user experience improvements.</p>
+                
+                <p><strong>Analytics & Performance Monitoring:</strong> Designed comprehensive analytics architecture tracking full customer journey from ad click to purchase. Implemented multi-touch attribution modeling providing visibility into channel performance and enabling budget optimization decisions.</p>
+                
+                <p><strong>Risk Management & Quality Control:</strong> Developed supplier risk mitigation strategy with backup vendors and quality inspection protocols. Managed payment security compliance (PCI DSS), data privacy (GDPR), and accessibility standards (WCAG 2.1) ensuring zero security incidents.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Implementation Process</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Product Development & Sourcing</h3>
+                    <ul class="process-list">
+                        <li><strong>Product Research:</strong> Market analysis and competitor evaluation</li>
+                        <li><strong>Prototype Sourcing:</strong> Vendor identification and sample procurement</li>
+                        <li><strong>Quality Testing:</strong> Comprehensive product testing and validation</li>
+                        <li><strong>Supplier Negotiations:</strong> Cost optimization and quality agreements</li>
+                        <li><strong>Inventory Planning:</strong> Demand forecasting and stock management</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Website Development & Launch</h3>
+                    <ul class="process-list">
+    <section class="content-section">
+        <div class="container">
+            <h2>Quantifiable Impact</h2>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <span class="metric-highlight">4.8x</span>
+                    <h3>ROAS</h3>
+                    <p class="metric-label">Return on ad spend</p>
+                </div>
+                <div class="result-item">
+                    <div class="icon"><i class="fas fa-percent"></i></div>
+                    <span class="metric-highlight">3.2%</span>
+                    <h3>Conversion Rate</h3>
+                    <p class="metric-label">Industry-leading performance</p>
+                </div>
+                <div class="result-item">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <span class="metric-highlight">25K+</span>
+                    <h3>Social Following</h3>
+                    <p class="metric-label">Built from zero</p>
+                </div>
+                <div class="result-item">
+                    <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                    <span class="metric-highlight">95%</span>
+                    <h3>Mobile Traffic</h3>
+                    <p class="metric-label">Mobile-first success</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--background-light);">
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Senior TPM Insights</h2>
+            <div class="highlight-box">
+                <p><strong>Digital Transformation:</strong> Led end-to-end e-commerce program from concept to $75K revenue. Secured budget, managed cross-functional teams, delivered MVP in 3 months.</p>
+                
+                <p><strong>Platform Selection:</strong> Evaluated 5 platforms, recommended Shopify based on TCO, scalability, and time-to-market analysis.</p>
+                
+                <p><strong>A/B Testing Excellence:</strong> Implemented experimentation framework testing 30+ variants, improving conversion by 40% through systematic optimization.</p>
+                
+                <p><strong>Multi-Touch Attribution:</strong> Designed analytics architecture tracking full customer journey, enabling data-driven budget optimization achieving 4.8x ROAS.</p>
+            </div>
+        </div>
+    </section>ontainer">
+            <h2>Key Performance Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">95%</div>
+                    <h4>Mobile Traffic</h4>
+                    <p>Percentage of traffic from mobile devices</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">3.2%</div>
+                    <h4>Conversion Rate</h4>
+                    <p>Average conversion rate across all traffic sources</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">4.8x</div>
+                    <h4>ROAS</h4>
+                    <p>Return on advertising spend for paid campaigns</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">25K+</div>
+                    <h4>Social Followers</h4>
+                    <p>Combined followers across Instagram and Facebook</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">2.3s</div>
+                    <h4>Load Time</h4>
+                    <p>Average page load time optimization</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">85%</div>
+                    <h4>Customer Satisfaction</h4>
+                    <p>Customer satisfaction score from post-purchase surveys</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--background-light);">
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Project Deliverables & Outcomes</h2>
+            <div class="highlight-box">
+                <h3>Key Achievements</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 20px;">
+                    <div>
+                        <h4 style="color: var(--ecommerce-color); margin-bottom: 10px;">
+                            <i class="fas fa-store"></i> Complete E-commerce Platform
+                        </h4>
+                        <p>Fully functional Shopify store with custom design, payment processing, and inventory management</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--success-color); margin-bottom: 10px;">
+                            <i class="fas fa-chart-line"></i> Integrated Marketing System
+                        </h4>
+                        <p>Seamless integration between social media platforms and e-commerce store with automated workflows</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-color); margin-bottom: 10px;">
+                            <i class="fas fa-cogs"></i> Scalable Operations
+                        </h4>
+                        <p>Established vendor relationships, quality control processes, and scalable fulfillment systems</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--gold-accent); margin-bottom: 10px;">
+                            <i class="fas fa-bullseye"></i> Targeted Growth Strategy
+                        </h4>
+                        <p>Data-driven marketing approach with optimized sales funnels and customer acquisition strategies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Project Management Insights</h2>
+            <div class="highlight-box">
+                <h3>Lessons Learned & Best Practices</h3>
+                <p><strong>Lean Startup Application:</strong> Using lean startup methodology in e-commerce projects enables rapid market validation and reduces time-to-market significantly.</p>
+                <p><strong>Integrated Marketing Approach:</strong> Success in e-commerce requires seamless integration between platform development and marketing execution from day one.</p>
+                <p><strong>Quality Control:</strong> Early investment in product sourcing and quality testing prevents customer satisfaction issues and reduces long-term costs.</p>
+                <p><strong>Data-Driven Optimization:</strong> Continuous monitoring and optimization of key metrics drives sustainable growth and profitability.</p>
+                <p><strong>Cross-Platform Strategy:</strong> Managing multiple platforms (Shopify, Instagram, Facebook) requires coordinated project management and consistent brand messaging.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Jasmine A.R.T., PMP, CSM | Professional Project Manager</p>
+            <div>
+                <a href="index.html" style="color: #ccc; text-decoration: none;">Back to Portfolio</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Jasmine A.R.T., PMP, CSM | Professional Project Manager</p>
+            <div>
+                <a href="index.html" style="color: #ccc; text-decoration: none;">Back to Portfolio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js Configuration - Monochrome + Blue
+        const chartColors = {
+            primary: '#2b6cb0',    // Blue
+            secondary: '#4a5568',  // Grey
+            dark: '#1a1a1a',       // Almost Black
+            light: '#999999'       // Light Grey
+        };
+
+        // ROAS Trend Chart
+        const roasCtx = document.getElementById('roasChart').getContext('2d');
+        new Chart(roasCtx, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                datasets: [{
+                    label: 'Return on Ad Spend (ROAS)',
+                    data: [2.1, 2.8, 3.5, 4.2, 4.5, 4.8],
+                    borderColor: chartColors.ecommerce,
+                    backgroundColor: chartColors.ecommerce + '20',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'ROAS (x)' }
+                    }
+                }
+            }
+        });
+
+        // Conversion Rate Chart
+        const conversionCtx = document.getElementById('conversionChart').getContext('2d');
+        new Chart(conversionCtx, {
+            type: 'line',
+            data: {
+                labels: ['Baseline', 'Week 2', 'Week 4', 'Week 6', 'Week 8', 'Week 10', 'Week 12'],
+                datasets: [{
+                    label: 'Conversion Rate (%)',
+                    data: [2.3, 2.5, 2.7, 2.9, 3.0, 3.1, 3.2],
+                    borderColor: chartColors.success,
+                    backgroundColor: chartColors.success + '20',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'top' }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 2.0,
+                        max: 3.5,
+                        title: { display: true, text: 'Conversion Rate (%)' }
+                    }
+                }
+            }
+        });
+
+        // Traffic Source Distribution
+        const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+        new Chart(trafficCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Instagram', 'Facebook', 'Google Ads', 'Organic', 'Direct'],
+                datasets: [{
+                    data: [45, 25, 15, 10, 5],
+                    backgroundColor: [
+                        chartColors.ecommerce,
+                        chartColors.primary,
+                        chartColors.gold,
+                        chartColors.success,
+                        '#9ca3af'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Monthly Revenue Growth
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3'],
+                datasets: [{
+                    label: 'Revenue ($K)',
+                    data: [12, 28, 35],
+                    backgroundColor: [
+                        chartColors.primary + '80',
+                        chartColors.success + '80',
+                        chartColors.ecommerce + '80'
+                    ],
+                    borderColor: [
+                        chartColors.primary,
+                        chartColors.success,
+                        chartColors.ecommerce
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Revenue ($K)' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

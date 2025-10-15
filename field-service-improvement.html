@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field Service Improvement Case Study | Jasmine A.R.T., PMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* --- Professional Monochrome + Blue Palette --- */
+        :root {
+            --primary-text: #1a1a1a;
+            --secondary-text: #4a5568;
+            --background-light: #f7f7f7;
+            --accent-color: #2b6cb0;
+            --accent-hover: #1e4d7a;
+            --success-color: #2b6cb0;
+            --gold-accent: #666666;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--primary-text);
+            line-height: 1.6;
+            background-color: #fff;
+            scroll-behavior: smooth;
+            padding-top: 40px;
+            overflow-x: hidden;
+            word-wrap: break-word;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.5em;
+            word-wrap: break-word;
+        }
+
+        h1 { font-size: 2.5em; }
+        h2 { font-size: 2em; }
+        h3 { font-size: 1.5em; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 20px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.95em;
+            color: var(--primary-text);
+        }
+
+        .back-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .back-link:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Case Study Content */
+        .case-study-hero {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .case-study-hero h1 {
+            margin-bottom: 20px;
+        }
+
+        .case-study-hero p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .project-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .overview-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .overview-card i {
+            font-size: 2.5em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .overview-card h3 {
+            color: var(--primary-text);
+            margin-bottom: 10px;
+        }
+
+        .content-section {
+            margin: 60px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .highlight-box {
+            background: var(--background-light);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid var(--success-color);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .result-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .result-item .icon {
+            font-size: 2em;
+            color: var(--success-color);
+            margin-bottom: 10px;
+        }
+
+        /* Metric Highlights */
+        .metric-highlight {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+            margin: 10px 0;
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 0.85em;
+            color: var(--secondary-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .stat-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin: 5px;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+
+        .chart-container h3 {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .chart-wrapper {
+                height: 250px;
+            }
+            .chart-container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        ul.process-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.process-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        ul.process-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .footer {
+            padding: 20px 0;
+            background-color: #2c3e50;
+            color: #ccc;
+            font-size: 0.9em;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="header-nav">
+        <div class="container nav-content">
+            <div class="logo">Jasmine A.R.T. | PMP, CSM</div>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+        </div>
+    </nav>
+
+    <section class="case-study-hero">
+        <div class="container">
+            <h1><i class="fas fa-tools"></i> Field Service Digital Transformation</h1>
+            <p>Led cross-functional agile transformation of field service operations through strategic process automation, stakeholder alignment, and continuous delivery practices</p>
+            <div style="margin-top: 20px;">
+                <span class="stat-badge"><i class="fas fa-chart-line"></i> 75% Reduction in Manual Effort</span>
+                <span class="stat-badge"><i class="fas fa-users"></i> 40% Team Productivity Increase</span>
+                <span class="stat-badge"><i class="fas fa-dollar-sign"></i> 80% Billing Accuracy Improvement</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="project-overview">
+                <div class="overview-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Project Timeline</h3>
+                    <p><strong>6-month delivery</strong> with agile sprints and continuous deployment strategy</p>
+                </div>
+                <div class="overview-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Team Leadership</h3>
+                    <p><strong>Cross-functional team</strong> with daily standups, sprint planning, and stakeholder governance</p>
+                </div>
+                <div class="overview-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Methodology</h3>
+                    <p><strong>Agile/Scrum</strong> with Kanban visualization and continuous improvement cycles</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Challenge & Approach</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Business Challenges</h3>
+                    <ul class="process-list">
+                        <li><strong>Manual Processes:</strong> No automation in client communication and scheduling</li>
+                        <li><strong>Billing Errors:</strong> 80% error rate causing revenue leakage</li>
+                        <li><strong>No Visibility:</strong> Lack of KPI tracking and performance metrics</li>
+                        <li><strong>Team Blockers:</strong> Low sprint velocity due to unresolved impediments</li>
+                    </ul>
+                </div>
+                <div class="highlight-box">
+                    <h3>PM Strategy</h3>
+                    <p><strong>Agile Transformation:</strong> Implemented Scrum with 2-week sprints, daily standups, and stakeholder governance.</p>
+                    <p><strong>Risk Management:</strong> Maintained RAID log and proactive mitigation strategies.</p>
+                    <p><strong>Change Leadership:</strong> Executive alignment through communication matrix and bi-weekly steering meetings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--background-light);">
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Performance Trends & Impact Visualization</h2>
+            
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Sprint Velocity Improvement</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="velocityChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Billing Accuracy Trend</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="billingChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Team Productivity Gains</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="productivityChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Automation Impact</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="automationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Key Deliverables</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Technical Solutions</h3>
+                    <ul class="process-list">
+                        <li>Automated client communication system with CRM integration</li>
+                        <li>6-month predictive service calendar with 95% accuracy</li>
+                        <li>KPI dashboard for real-time performance tracking</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Process Improvements</h3>
+                    <ul class="process-list">
+                        <li>Agile ceremonies: sprints, standups, retrospectives</li>
+                        <li>Billing validation process reducing errors by 80%</li>
+                        <li>Team coaching increasing velocity by 15%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Quantifiable Impact</h2>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="icon"><i class="fas fa-robot"></i></div>
+                    <span class="metric-highlight">75%</span>
+                    <h3>Automation Efficiency</h3>
+                    <p class="metric-label">Reduction in manual effort</p>
+                </div>
+                <div class="result-item">
+                    <div class="icon"><i class="fas fa-dollar-sign"></i></div>
+                    <span class="metric-highlight">80%</span>
+                    <h3>Billing Accuracy</h3>
+                    <p class="metric-label">Error reduction achieved</p>
+                </div>
+                <div class="result-item">
+                    <div class="icon"><i class="fas fa-users-cog"></i></div>
+                    <span class="metric-highlight">40%</span>
+                    <h3>Team Productivity</h3>
+                    <p class="metric-label">Efficiency improvement</p>
+                </div>
+                <div class="result-item">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <span class="metric-highlight">15%</span>
+                    <h3>Sprint Velocity</h3>
+                    <p class="metric-label">Continuous improvement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--background-light);">
+        <div class="container" style="padding: 60px 20px;">
+            <h2>Senior TPM Insights</h2>
+            <div class="highlight-box">
+                <p><strong>Stakeholder Management:</strong> Secured executive buy-in through transparent communication and bi-weekly steering committee updates showcasing ROI metrics.</p>
+                
+                <p><strong>Agile Leadership:</strong> Championed Scrum adoption achieving 15% velocity improvement through coaching, retrospectives, and impediment removal.</p>
+                
+                <p><strong>Risk Mitigation:</strong> Proactively managed change resistance via comprehensive training program and phased rollout, achieving 90%+ adoption in 30 days.</p>
+                
+                <p><strong>Metrics-Driven:</strong> Established KPI dashboard tracking velocity, SLA compliance, and cost savings—enabling data-driven decision making.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Jasmine A.R.T., PMP, CSM | Professional Project Manager</p>
+            <div>
+                <a href="index.html" style="color: #ccc; text-decoration: none;">Back to Portfolio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js Configuration - Monochrome + Blue
+        const chartColors = {
+            primary: '#2b6cb0',    // Blue
+            secondary: '#4a5568',  // Grey
+            dark: '#1a1a1a',       // Almost Black
+            light: '#999999'       // Light Grey
+        };
+
+        // Sprint Velocity Chart
+        const velocityCtx = document.getElementById('velocityChart').getContext('2d');
+        new Chart(velocityCtx, {
+            type: 'line',
+            data: {
+                labels: ['Sprint 1', 'Sprint 2', 'Sprint 3', 'Sprint 4', 'Sprint 5', 'Sprint 6', 'Sprint 7', 'Sprint 8', 'Sprint 9', 'Sprint 10', 'Sprint 11', 'Sprint 12'],
+                datasets: [{
+                    label: 'Story Points Completed',
+                    data: [20, 22, 24, 26, 25, 27, 28, 29, 28, 30, 31, 32],
+                    borderColor: chartColors.primary,
+                    backgroundColor: chartColors.primary + '20',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Story Points'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Billing Accuracy Chart
+        const billingCtx = document.getElementById('billingChart').getContext('2d');
+        new Chart(billingCtx, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                datasets: [{
+                    label: 'Billing Accuracy (%)',
+                    data: [20, 35, 52, 68, 75, 80],
+                    borderColor: chartColors.secondary,
+                    backgroundColor: chartColors.secondary + '20',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Accuracy Improvement (%)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Team Productivity Chart
+        const productivityCtx = document.getElementById('productivityChart').getContext('2d');
+        new Chart(productivityCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Baseline', 'Month 2', 'Month 4', 'Month 6'],
+                datasets: [{
+                    label: 'Productivity Index',
+                    data: [100, 115, 128, 140],
+                    backgroundColor: [
+                        chartColors.light + '80',
+                        chartColors.secondary + '80',
+                        chartColors.primary + '80',
+                        chartColors.dark + '80'
+                    ],
+                    borderColor: [
+                        chartColors.light,
+                        chartColors.secondary,
+                        chartColors.primary,
+                        chartColors.dark
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Productivity Index (Baseline = 100)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Automation Impact Chart
+        const automationCtx = document.getElementById('automationChart').getContext('2d');
+        new Chart(automationCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Automated', 'Manual'],
+                datasets: [{
+                    data: [75, 25],
+                    backgroundColor: [
+                        chartColors.primary,
+                        '#e2e8f0'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
