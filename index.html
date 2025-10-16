@@ -43,9 +43,13 @@
             color: var(--primary-text);
         }
 
-        h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
-        h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
-        h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+        h1 { font-size: clamp(2rem, 5vw, 3rem); }
+        h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+        h3 { font-size: clamp(1.35rem, 3vw, 1.75rem); }
+        
+        section {
+            padding: clamp(3rem, 8vw, 5rem) 0;
+        }
 
         p {
             margin-bottom: 1em;
@@ -337,8 +341,9 @@
         .case-card h3 {
             color: var(--primary-text);
             margin-bottom: 1rem;
-            font-size: clamp(1.3rem, 2.5vw, 1.75rem);
-            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .case-card h3 i {
@@ -391,6 +396,7 @@
             margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 1px solid var(--border-color);
+            color: var(--accent-color);
         }
 
         /* --- 4. Tabs (if needed) --- */
@@ -829,7 +835,7 @@
                     <i class="fas fa-chart-gantt"></i> Program Management
                 </div>
                 <div class="pmp-badge" style="margin-top: 20px;">
-                    <span style="background: var(--gold-accent); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600;">
+                    <span style="background: var(--accent-color); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600;">
                         <i class="fas fa-award"></i> PMP ID: 4190500
                     </span>
                 </div>
@@ -843,13 +849,13 @@
     <section id="welcome-intro" style="padding: 60px 0; background: linear-gradient(135deg, var(--background-light) 0%, #ffffff 100%);">
         <div class="container">
             <div class="welcome-intro-content" style="max-width: 900px; margin: 0 auto; text-align: center;">
-                <h2 style="color: var(--primary-text); margin-bottom: 30px; font-size: 2.2em;">Passionate About Delivering Excellence</h2>
+                <h2 style="margin-bottom: 30px;">Passionate About Delivering Excellence</h2>
                 <div class="intro-content" style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); border-left: 5px solid var(--accent-color); position: relative;">
                     <div class="decorative-quote" style="position: absolute; top: -10px; left: 30px; background: white; padding: 0 15px;">
                         <i class="fas fa-quote-left" style="color: var(--accent-color); font-size: 1.2em;"></i>
                     </div>
                     <p style="font-size: 1.15em; line-height: 1.8; color: var(--primary-text); margin-bottom: 0; text-align: left;">
-                        With <strong style="color: var(--accent-color);">8+ years</strong> driving digital transformations, now as a certified <strong style="color: var(--gold-accent);">PMP and Scrum Master</strong>, I value and commit to delivering projects on-time and on-budget while exceeding stakeholder expectations. I combine agile methodologies with proven PM practices to turn complex challenges into measurable results.
+                        With <strong style="color: var(--accent-color);">8+ years</strong> driving digital transformations, now as a certified <strong style="color: var(--primary-text);">PMP and Scrum Master</strong>, I value and commit to delivering projects on-time and on-budget while exceeding stakeholder expectations. I combine agile methodologies with proven PM practices to turn complex challenges into measurable results.
                     </p>
                 </div>
                 <div class="fun-stats" style="display: flex; justify-content: center; gap: 40px; margin-top: 35px; flex-wrap: wrap;">
@@ -881,8 +887,8 @@
 
     <section id="projects">
         <div class="container">
-            <h2 style="text-align: center;">Case Studies</h2>
-            <p style="text-align: center; margin-bottom: 40px; color: var(--secondary-text);">Deep dive into real-world project successes with detailed methodologies, challenges overcome, and measurable outcomes.</p>
+            <h2 style="text-align: center; margin-bottom: 1rem;">Case Studies</h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: var(--secondary-text); font-size: 1.1rem; max-width: 800px; margin-left: auto; margin-right: auto;">Deep dive into real-world project successes with detailed methodologies, challenges overcome, and measurable outcomes.</p>
             <div class="case-studies-grid">
                 <div class="case-card" onclick="window.open('field-service-improvement.html', '_blank')" style="cursor: pointer;">
                     <div>
@@ -892,11 +898,11 @@
                             <li>✓ <strong>75% reduction</strong> in manual effort through automation</li>
                             <li>✓ <strong>80% improvement</strong> in billing accuracy via systematic QA</li>
                         </ul>
-                        <div class="project-methodology" style="margin-top: 15px; font-size: 0.9em; color: var(--secondary-text);">
+                        <div class="project-methodology">
                             <strong>TPM Skills:</strong> Agile/Scrum Leadership, Stakeholder Governance, Risk Mitigation, KPI Tracking
                         </div>
                     </div>
-                    <div class="view-link" style="color: var(--accent-color); font-weight: 600;">Click to View Full Case Study &rarr;</div>
+                    <div class="view-link">Click to View Full Case Study &rarr;</div>
                 </div>
 
                 <div class="case-card" onclick="window.open('client-outreach-automation.html', '_blank')" style="cursor: pointer;">
@@ -907,11 +913,11 @@
                             <li>✓ <strong>200% YoY retention increase</strong> through automated engagement</li>
                             <li>✓ <strong>333% time reduction</strong> (10hrs to 3hrs weekly workload)</li>
                         </ul>
-                        <div class="project-methodology" style="margin-top: 15px; font-size: 0.9em; color: var(--secondary-text);">
+                        <div class="project-methodology">
                             <strong>TPM Skills:</strong> Process Automation Strategy, Workflow Optimization, Technical Documentation, SLA Management
                         </div>
                     </div>
-                    <div class="view-link" style="color: var(--accent-color); font-weight: 600;">Click to View Full Case Study &rarr;</div>
+                    <div class="view-link">Click to View Full Case Study &rarr;</div>
                 </div>
 
                 <div class="case-card" onclick="window.open('inventory-tracking-app.html', '_blank')" style="cursor: pointer;">
@@ -922,11 +928,11 @@
                             <li>✓ <strong>95% accuracy improvement</strong> through real-time data validation</li>
                             <li>✓ <strong>90%+ user adoption</strong> within first month post-launch</li>
                         </ul>
-                        <div class="project-methodology" style="margin-top: 15px; font-size: 0.9em; color: var(--secondary-text);">
+                        <div class="project-methodology">
                             <strong>TPM Skills:</strong> Solution Architecture, Vendor Management, UAT Coordination, Training Program Development
                         </div>
                     </div>
-                    <div class="view-link" style="color: var(--accent-color); font-weight: 600;">Click to View Full Case Study &rarr;</div>
+                    <div class="view-link">Click to View Full Case Study &rarr;</div>
                 </div>
             </div>
         </div>
@@ -953,7 +959,7 @@
             <h2>Certifications & Credentials</h2>
             <div class="certification-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
                 <div class="cert-card" style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center;">
-                    <div style="font-size: 3em; color: var(--gold-accent); margin-bottom: 15px;">
+                    <div style="font-size: 3em; color: var(--accent-color); margin-bottom: 15px;">
                         <i class="fas fa-certificate"></i>
                     </div>
                     <h3>Project Management Professional (PMP)®</h3>
@@ -973,7 +979,7 @@
                 </div>
                 
                 <div class="cert-card" style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center;">
-                    <div style="font-size: 3em; color: var(--success-color); margin-bottom: 15px;">
+                    <div style="font-size: 3em; color: var(--accent-color); margin-bottom: 15px;">
                         <i class="fas fa-award"></i>
                     </div>
                     <h3>Lean Six Sigma Green Belt Certification</h3>
